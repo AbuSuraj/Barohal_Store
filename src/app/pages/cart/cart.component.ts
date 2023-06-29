@@ -12,14 +12,28 @@ export class CartComponent implements OnInit {
     name: 'Item 1',
     price: 100,
     quantity: 1,
-    product:'https://via.placehold.com/150'
-  }]};
+    product:'https://via.placeholder.com/150'
+  },
+  {
+    id: 1,
+    name: 'Item 1',
+    price: 100,
+    quantity: 3,
+    product:'https://via.placeholder.com/150'
+  }
+]};
 
   dataSource: CartItem [] = [];
-  displayedColumns: string[] = ['product','name', 'price', 'quantity', 'total', 'action'];
+  displayColumns: string[] = ['product','name', 'price', 'quantity', 'total', 'action'];
   
   ngOnInit(): void {
     this.dataSource = this.cart.items;
+  }
+
+  getTotal(items: CartItem[]): number {
+    return items.map(item =>item.price * item.quantity)
+                .reduce((prev,current)=>prev+current, 0)
+
   }
    
 }

@@ -38,4 +38,5 @@ export class HomeComponent implements OnInit {
       id: product.id,
     })
   }
+  
 }

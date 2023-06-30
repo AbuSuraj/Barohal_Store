@@ -6,7 +6,7 @@ import { Product } from 'src/app/Models/product.model';
   templateUrl: './product-box.component.html',
   styleUrls: ['./product-box.component.css']
 })
-export class ProductBoxComponent implements OnInit {
+export class ProductBoxComponent {
 @Input() fullWidthMode = false;
 @Output() addToCart = new EventEmitter();
 
@@ -18,9 +18,6 @@ product: Product | undefined ={
   category: 'Shoes',
   image: 'https://via.placeholder.com/150'
 };
-ngOnInit(): void {
-  throw new Error('Method not implemented.');
-}
 
 onAddToCart(): void {
   this.addToCart.emit(this.product);

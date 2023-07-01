@@ -34,6 +34,16 @@ export class HomeComponent implements OnInit, OnDestroy {
     })
   }
   
+  onSortChange(sort:string): void{
+    this.sort = sort;
+    this.getProducts();
+  }
+
+  onLimitChange(limit:number): void{
+    this.count = limit.toString();
+    this.getProducts();
+  }
+
   onColumnsCountChange(cols:number): void{
     this.cols = cols;
     this.rowHeight = ROWS_HEIGHT[this.cols];

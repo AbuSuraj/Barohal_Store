@@ -6,14 +6,14 @@
              <mat-icon>expand_more</mat-icon>
             </button>
             <mat-menu #sortByMenu="matMenu">
-                <button (click)="onSortUpdated('Desc')" mat-menu-item>Desc</button>
-                <button (click)="onSortUpdated('Asc')" mat-menu-item>Asc</button>
+                <button (click)="onSortUpdated('desc')" mat-menu-item>Desc</button>
+                <button (click)="onSortUpdated('asc')" mat-menu-item>Asc</button>
             </mat-menu>
         </div>
         <div class="flex items-center">
             <div>
                 <button mat-button [mat-menu-trigger-for]="menu">
-                    Show {{itemShowCount}}
+                    Show {{itemCount}}
                     <mat-icon>expand_more</mat-icon>
                 </button>
                 <mat-menu #menu="matMenu">

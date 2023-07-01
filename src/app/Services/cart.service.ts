@@ -26,6 +26,37 @@ export class CartService {
     console.log(this.cart.value.items[0].quantity);
   }
 
+  removeQuantity(item: CartItem): void {
+    
+    const items = [...this.cart.value.items];
+    const itemInCart = items.find(_item => _item.id === item.id); 
+    if(itemInCart){
+      itemInCart.quantity -= 1;
+      this._snackBar.open('1 item has been removed', 'Ok', {duration: 3000})
+      
+      if(itemInCart.quantity ==0){
+         this.removeFromCart(itemInCart);
+      }
+    }
+    // let itemForRemoval: CartItem | undefined ;
+  //   let fileterdItems = this.cart.value.items.map(_item =>{
+  //     if(_item.id === item.id){
+  //       _item.quantity -= 1;
+
+  //       if(_item.quantity === 0){
+  //         itemForRemoval = _item;
+  //       }
+  //     }
+  //     return _item;
+  //   })
+  //   if(itemForRemoval){
+  //     fileterdItems = this.removeFromCart(itemForRemoval, false)
+  //   }
+  
+  // this.cart.next({items:fileterdItems});
+  // this._snackBar.open('1 item has been removed', 'Ok', {duration: 3000});
+}
+
   getTotal(items: CartItem[]): number {
     return items.map(item =>item.price * item.quantity)
                 .reduce((prev,current)=>prev+current, 0)
@@ -47,24 +78,4 @@ export class CartService {
       return fileterdItems;
   }
 
-  removeQuantity(item: CartItem): void {
-    let itemForRemoval: CartItem | undefined ;
-    
-    let fileterdItems = this.cart.value.items.map(_item =>{
-      if(_item.id === item.id){
-        _item.quantity -= 1;
-
-        if(_item.quantity === 0){
-          itemForRemoval = _item;
-        }
-      }
-      return _item;
-    })
-    if(itemForRemoval){
-      fileterdItems = this.removeFromCart(itemForRemoval, false)
-    }
-  
-  this.cart.next({items:fileterdItems});
-  this._snackBar.open('1 item has been removed', 'Ok', {duration: 3000});
-}
 }

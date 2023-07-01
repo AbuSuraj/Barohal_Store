@@ -37,11 +37,34 @@ export class CartService {
     this._snackBar.open('Cart has been cleared', 'Ok', {duration: 3000});
   }
 
-  removeFromCart(item:CartItem):void{
+  removeFromCart(item:CartItem, update = true):CartItem[] {
     const fileterdItems = this.cart.value.items.filter(
       (_item) => _item.id !== item.id);
-      this.cart.next({items:fileterdItems});
-      this._snackBar.open('1 item has been removed', 'Ok', {duration: 3000});
+      if(update){
+        this.cart.next({items:fileterdItems});
+        this._snackBar.open('1 item has been removed', 'Ok', {duration: 3000});
+      }
+      return fileterdItems;
   }
 
+  removeQuantity(item: CartItem): void {
+    let itemForRemoval: CartItem | undefined ;
+    
+    let fileterdItems = this.cart.value.items.map(_item =>{
+      if(_item.id === item.id){
+        _item.quantity -= 1;
+
+        if(_item.quantity === 0){
+          itemForRemoval = _item;
+        }
+      }
+      return _item;
+    })
+    if(itemForRemoval){
+      fileterdItems = this.removeFromCart(itemForRemoval, false)
+    }
+  
+  this.cart.next({items:fileterdItems});
+  this._snackBar.open('1 item has been removed', 'Ok', {duration: 3000});
+}
 }

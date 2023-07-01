@@ -37,4 +37,11 @@ export class CartService {
     this._snackBar.open('Cart has been cleared', 'Ok', {duration: 3000});
   }
 
+  removeFromCart(item:CartItem):void{
+    const fileterdItems = this.cart.value.items.filter(
+      (_item) => _item.id !== item.id);
+      this.cart.next({items:fileterdItems});
+      this._snackBar.open('1 item has been removed', 'Ok', {duration: 3000});
+  }
+
 }

@@ -24,6 +24,8 @@ import { ProductsHeaderComponent } from './pages/home/components/products-header
 import { FiltersComponent } from './pages/home/components/filters/filters.component';
 import { ProductBoxComponent } from './pages/home/components/product-box/product-box.component';
 import { CartComponent } from './pages/cart/cart.component';
+import { CartService } from './Services/cart.service';
+import { StoreService } from './Services/store.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -54,7 +56,7 @@ import { CartComponent } from './pages/cart/cart.component';
     BrowserAnimationsModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [CartService, StoreService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

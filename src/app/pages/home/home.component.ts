@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { StoreService } from './../../Services/store.service';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { Product } from 'src/app/Models/product.model';
 import { CartService } from 'src/app/Services/cart.service';
 
@@ -8,27 +10,40 @@ const ROWS_HEIGHT:{[id:number]:number} = {1:400, 3:335, 4: 350};
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
   cols = 3;
   category: string | undefined;
   rowHeight = ROWS_HEIGHT[this.cols];
-  
-  constructor(private cartService: CartService) { 
-  }
+  products: Product[] | undefined;
+  sort: string = 'desc';
+  count: string = '12';
+  productSubcription: Subscription | undefined;
 
-  ngOnInit(): void {
-    
+  constructor(private cartService: CartService, private storeService: StoreService) { 
   }
+  
+  ngOnInit(): void {
+    this.getProducts();
+  }
+  
+  getProducts(): void {
+    this.productSubcription =  this.storeService.getAllProducts(this.count, this.sort)
+    .subscribe((_products)=>{
+      this.products = _products;
+      console.log(this.products);
+    })
+  }
+  
   onColumnsCountChange(cols:number): void{
     this.cols = cols;
     this.rowHeight = ROWS_HEIGHT[this.cols];
   }
-
- 
+  
+  
   onShowCategory(newCategory: string): void {
     this.category = newCategory;
   }
-
+  
   onAddToCart(product: Product): void {
     this.cartService.addToCart({
       product: product.image,
@@ -39,4 +54,9 @@ export class HomeComponent implements OnInit {
     })
   }
   
+  ngOnDestroy(): void {
+  if(this.productSubcription){
+    this.productSubcription.unsubscribe();
+  }
+  }
 }

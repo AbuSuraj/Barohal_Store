@@ -15,8 +15,12 @@ export class FiltersComponent implements OnInit, OnDestroy {
   constructor(private storeService: StoreService){}
 
   ngOnInit(): void {
-  this.categoriesSubscription =  this.storeService.getAllCategories().subscribe(categories =>
-      this.categories = categories)
+  this.categoriesSubscription =  this.storeService.getAllCategories().subscribe(categories =>{
+
+    this.categories = categories;
+    this.categories = [...this.categories, 'All']
+    console.log(this.categories)
+  })
   }
 
   onShowCategory(category: string): void {

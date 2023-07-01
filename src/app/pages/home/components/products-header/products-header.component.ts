@@ -6,7 +6,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
   styleUrls: ['./products-header.component.css']
 })
 export class ProductsHeaderComponent {
-@Output() sortChange = new EventEmitter<string>();
+ @Output() sortChange = new EventEmitter<string>();
  @Output() itemCountChange = new EventEmitter<number>();
  @Output() columnsCountChange = new EventEmitter<number>();
  

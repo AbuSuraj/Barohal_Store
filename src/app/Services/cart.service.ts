@@ -32,7 +32,7 @@ export class CartService {
 
   }
 
-  clearCut():void{
+  clearCart():void{
     this.cart.next({items:[]});
     this._snackBar.open('Cart has been cleared', 'Ok', {duration: 3000});
   }

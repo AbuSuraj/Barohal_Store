@@ -3,6 +3,9 @@ const cors = require('cors');
 const bodyparser = require('body-parser');
 
 const app = express();
+// middle wares
+app.use(cors());
+app.use(express.json());
 
 app.use(express.static('public'));
 app.use(bodyparser.urlencoded({ extended: false }));
@@ -71,8 +74,8 @@ app.post("/checkout", async (req, res) => {
                 quantity: item.quantity,
               })),
                mode: "payment",
-               success_url: "http://localhost:4242/success.html",
-               cancel_url: "http://localhost:4242/cancel.html",
+               success_url: "https://barohal-store-server.netlify.app/success.html",
+               cancel_url: "https://barohal-store-server.netlify.app/cancel.html",
             });
     
         res.status(200).send(session)
@@ -81,5 +84,7 @@ app.post("/checkout", async (req, res) => {
             console.log(err)
         }
 })
-
+app.get("/", (req, res) => {
+  res.send("Barohal-shop server is running");
+});
 app.listen(4242,()=>console.log('app is listening on 4242'))

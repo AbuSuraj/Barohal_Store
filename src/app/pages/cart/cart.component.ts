@@ -46,7 +46,7 @@ export class CartComponent implements OnInit {
   }
 
   onCheckout():void{
-    this.http .post('http://localhost:4242/checkout', {
+    this.http .post('https://barohal-shop.vercel.app/checkout', {
       items: this.cart.items,
     }).subscribe(async (res:any) => {
         let stripe = await loadStripe('pk_test_51M8qlKHEhQ4vnNT3pb7gkGIFinsyDPpQAjGCuC0noHZaEIs5CFahEMknDcxahuKEK2kT8cklZOX6bq3aQjwyJ0gZ00g2GMU2Gx');

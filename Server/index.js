@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const bodyparser = require('body-parser');
-
+const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 const app = express();
 // middle wares
 app.use(cors());
@@ -13,6 +13,40 @@ app.use(bodyparser.json());
 app.use(cors({origin:true, credentials: true}))
 
 const stripe = require('stripe')("sk_test_51M8qlKHEhQ4vnNT3GPaQ5NnoLw0DhHojLtJQ4FSMQg7yvr6YNUtmGH2flU1TyTaciIFEv9Nhuy7CDt4YMwqgNrr500gNek4CAR")
+
+const uri = "mongodb+srv://Barohal_industry:dofmxSwCGqSzuGOx@cluster0.sc93kvm.mongodb.net/?retryWrites=true&w=majority";
+
+const client = new MongoClient(uri, {
+  serverApi: {
+    version: ServerApiVersion.v1,
+    strict: true,
+    deprecationErrors: true,
+  }
+});
+
+async function dbConnect(){
+    try {
+        client.connect();
+    } catch (err) {console.log(err.name)}
+}
+
+const Products = client.db("barohal-store-db").collection('products')
+dbConnect();
+
+app.get("/products", async (req, res) => {
+  try{
+    const cursor = Products.find({});
+    const products = await cursor.toArray();
+      res.send( products);
+  }
+  catch (error) {
+    res.send({
+      success: false,
+      error: error.message,
+    });
+  }
+
+})
 
 app.post("/checkout", async (req, res) => {
     try{

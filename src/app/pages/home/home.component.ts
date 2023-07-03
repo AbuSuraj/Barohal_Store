@@ -14,7 +14,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   cols = 3;
   category: string | undefined;
   rowHeight = ROWS_HEIGHT[this.cols];
-  products: Product[] | undefined;
+  products:  Product[] | undefined;
   sort: string = 'desc';
   count: string = '12';
   productSubcription: Subscription | undefined;
@@ -29,8 +29,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   getProducts(): void {
     this.productSubcription =  this.storeService.getAllProducts(this.count, this.sort, this.category)
     .subscribe((_products)=>{
-      this.products = _products;
-      console.log(this.products);
+      this.products = _products; 
     })
   }
   

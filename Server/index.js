@@ -17,9 +17,9 @@ const stripe = require('stripe')("sk_test_51M8qlKHEhQ4vnNT3GPaQ5NnoLw0DhHojLtJQ4
 app.post("/checkout", async (req, res) => {
     try{
         const session = await stripe.checkout.sessions.create({
-            shipping_address_collection: {
-                allowed_countries: ['US', 'CA'],
-              },
+          shipping_address_collection: {
+            allowed_countries: ['US', 'CA', 'BD', 'IN', 'GB', 'AU', 'DE', 'FR', 'IT', 'ES', 'CN', 'JP'],
+          },
             shipping_options: [
                 {
                   shipping_rate_data: {

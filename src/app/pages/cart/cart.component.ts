@@ -14,7 +14,8 @@ export class CartComponent implements OnInit {
 
   dataSource: CartItem [] = [];
   displayColumns: string[] = ['product','name', 'price', 'quantity', 'total', 'action'];
-
+  baseUrl: string = 'http://localhost:4242/'
+  // baseUrl: string = 'https://barohal-shop.vercel.app/'
   constructor(private cartService: CartService,
     private http :HttpClient){}
   
@@ -46,7 +47,7 @@ export class CartComponent implements OnInit {
   }
 
   onCheckout():void{
-    this.http .post('https://barohal-shop.vercel.app/checkout', {
+    this.http .post(`${this.baseUrl}checkout`, {
       items: this.cart.items,
     }).subscribe(async (res:any) => {
         let stripe = await loadStripe('pk_test_51M8qlKHEhQ4vnNT3pb7gkGIFinsyDPpQAjGCuC0noHZaEIs5CFahEMknDcxahuKEK2kT8cklZOX6bq3aQjwyJ0gZ00g2GMU2Gx');

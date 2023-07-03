@@ -47,6 +47,24 @@ app.get("/products", async (req, res) => {
   }
 
 })
+app.get("/products/categories", async (req, res) => {
+  try{
+    const cursor = Products.find({},'category');
+    
+    const products = await cursor.toArray();
+    
+    const productCategory = products.map((product) => product.category);
+     const category = [...new Set(productCategory)]
+      res.send( category);
+  }
+  catch (error) {
+    res.send({
+      success: false,
+      error: error.message,
+    });
+  }
+
+})
 
 app.post("/checkout", async (req, res) => {
     try{

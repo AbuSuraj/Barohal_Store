@@ -35,7 +35,7 @@ export class HeaderComponent implements OnInit {
     //     .map((item) => item.quantity)
     //     .reduce((prev, current) => prev + current, 0);
     // });
-    // console.log(this.cart)
+   
   }
 
   getTotal(items: CartItem[]): number {

@@ -27,6 +27,7 @@ export class FiltersComponent implements OnInit, OnDestroy {
     this.showCategory.emit(category);
     
   }
+  
   ngOnDestroy(): void {
     if(this.categoriesSubscription)
     this.categoriesSubscription.unsubscribe();

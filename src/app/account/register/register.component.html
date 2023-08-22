@@ -1,4 +1,7 @@
 <!-- register.component.html -->
+<div class="container">
+    <div class="card">
+        <h4>SignUp here</h4>
 <form [formGroup]="registerForm" (ngSubmit)="onSubmit(registerForm.value)">
     <mat-form-field>
       <input matInput placeholder="Name" formControlName="name">
@@ -24,4 +27,5 @@
     
     <button mat-raised-button color="primary" type="submit" [disabled]="!registerForm.valid">Register</button>
   </form>
-  
+    </div>
+    </div>

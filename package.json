@@ -20,6 +20,7 @@
     "@angular/platform-browser": "^15.2.0",
     "@angular/platform-browser-dynamic": "^15.2.0",
     "@angular/router": "^15.2.0",
+    "@material/form-field": "^15.0.0-canary.684e33d25.0",
     "@stripe/stripe-js": "1.35",
     "firebase": "^9.23.0",
     "rxjs": "~7.8.0",
